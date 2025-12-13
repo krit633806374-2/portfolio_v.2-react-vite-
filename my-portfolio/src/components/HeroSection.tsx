@@ -24,8 +24,8 @@ export default function HeroSection() {
             style={{ x: useTransform(scrollY, [0, 500], [0, -1000]) }}
             className="absolute top-16"
           >
-            <h1 className="text-[180px] font-black text-white leading-none whitespace-nowrap drop-shadow-2xl">
-              Web
+            <h1 className="text-[160px] font-black text-white leading-none whitespace-nowrap drop-shadow-2xl">
+              Frontend
             </h1>
           </motion.div>
 
@@ -37,24 +37,68 @@ export default function HeroSection() {
             style={{ x: useTransform(scrollY, [0, 500], [0, 1000]) }}
             className="absolute top-52"
           >
-            <h1 className="text-[180px] font-black text-white leading-none whitespace-nowrap drop-shadow-2xl">
-              Designer
+            <h1 className="text-[160px] font-black text-white leading-none whitespace-nowrap drop-shadow-2xl">
+              Developer
             </h1>
           </motion.div>
         </div>
 
-        {/* Center Profile Image - No animation, just static */}
-        <div
-          className="relative z-20 mt-1"
-        >
-          <Image
-            src="/profile1.png"
-            alt="Profile"
-            width={400}
-            height={500}
-            priority
-            className="object-cover"
-          />
+        {/* Center Profile Image with Buttons */}
+        <div className="relative z-20 mt-1">
+          {/* Image */}
+          <div className="relative w-fit">
+            <Image
+              src="/profile1.png"
+              alt="Profile"
+              width={400}
+              height={500}
+              priority
+              className="object-cover"
+            />
+
+            {/* Buttons - Bottom Left of Image, almost overlapping */}
+            <div className="absolute bottom-1 -left-55 flex items-center gap-4">
+              {/* Download CV Button - Left */}
+              <motion.a
+                href="#"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-white text-white font-medium text-sm hover:bg-white hover:text-black transition-all"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <motion.svg 
+                  className="w-4 h-4" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                  whileHover={{ y: 3 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </motion.svg>
+                Download CV
+              </motion.a>
+
+              {/* Contact Me Button - Right */}
+              <motion.a
+                href="#"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-black font-medium text-sm hover:bg-gray-200 transition-all"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <motion.svg 
+                  className="w-4 h-4" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </motion.svg>
+                Contact Me 
+              </motion.a>
+            </div>
+          </div>
         </div>
       </div>
 
