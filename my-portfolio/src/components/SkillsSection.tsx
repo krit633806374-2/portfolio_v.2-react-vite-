@@ -104,30 +104,7 @@ export default function SkillsSection() {
       className="relative w-full min-h-screen bg-transparent flex items-center justify-center py-20 px-6"
     >
       <div className="max-w-7xl w-full">
-        {/* Header Section */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true, margin: '-100px' }}
-          className="text-center mb-20"
-        >
-          <motion.div
-            variants={itemVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            className="max-w-3xl mx-auto"
-          >
-            <div className="inline-block w-full">
-              <div className="flex items-center justify-center gap-3 mb-2">
-                <h1 className="text-6xl md:text-7xl font-black text-white">
-                  Skills
-                </h1>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
+  
 
         {/* Skills Container */}
         <motion.div
@@ -138,34 +115,6 @@ export default function SkillsSection() {
           className="space-y-16"
         >
           {/* Stack Section */}
-          <motion.div variants={itemVariants}>
-            <div className="mb-8">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                Stack & Technologies
-              </h2>
-              <div className="h-1 w-24 bg-gradient-to-r from-white/40 to-transparent"></div>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-              {stackItems.map((item, index) => (
-                <SkillCard key={item.name} item={item} index={index} />
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Tools Section */}
-          <motion.div variants={itemVariants}>
-            <div className="mb-8">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                Tools & Platforms
-              </h2>
-              <div className="h-1 w-24 bg-gradient-to-r from-white/40 to-transparent"></div>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {toolsItems.map((item, index) => (
-                <SkillCard key={item.name} item={item} index={index} />
-              ))}
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>
