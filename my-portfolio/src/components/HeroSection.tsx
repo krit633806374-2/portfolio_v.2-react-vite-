@@ -9,11 +9,14 @@ export default function HeroSection() {
   // Initial entry animations
   const webInitialX = 1000; // Start from right
   const designerInitialX = -1000; // Start from left
+  
+  // Profile image scroll transform - moves down when scrolling
+  const profileTranslateY = useTransform(scrollY, [0, 300], [0, 200]);
 
   return (
-    <div className="relative w-full h-screen bg-transparent overflow-hidden flex flex-col items-center justify-start pt-20">
+    <div className="relative w-full h-auto bg-transparent overflow-hidden flex flex-col items-center justify-start pt-16 pb-4">
       {/* Text and Image Container */}
-      <div className="relative w-full h-full flex flex-col items-center justify-start">
+      <div className="relative w-full flex flex-col items-center justify-start">
         {/* Text Overlay - "Web" and "Designer" */}
         <div className="absolute inset-0 flex flex-col items-center pointer-events-none z-10">
           {/* Left Text - "Web" */}
@@ -44,7 +47,10 @@ export default function HeroSection() {
         </div>
 
         {/* Center Profile Image with Buttons */}
-        <div className="relative z-20 mt-1">
+        <motion.div 
+          className="relative z-20 mt-1"
+          style={{ y: profileTranslateY }}
+        >
           {/* Image */}
           <div className="relative w-fit">
             <Image
@@ -81,13 +87,13 @@ export default function HeroSection() {
               {/* Contact Me Button - Right */}
               <motion.a
                 href="#"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-black font-medium text-sm hover:bg-gray-500 hover:text-white transition-all"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-black font-medium text-sm hover:bg-[#57595B] hover:text-white transition-all"
                 whileHover={{ scale: 1.05 }}
 
                 whileTap={{ scale: 0.95 }}
               >
                 <motion.svg 
-                  className="w-4 h-4" 
+                  className="w-4 h-6" 
                   fill="none" 
                   stroke="currentColor" 
                   viewBox="0 0 24 24"
@@ -100,18 +106,8 @@ export default function HeroSection() {
               </motion.a>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <div className="text-white text-sm font-light">Scroll to explore</div>
-        <div className="text-white text-2xl text-center mt-2">↓</div>
-      </motion.div>
     </div>
   );
 }
