@@ -129,7 +129,7 @@ export default function HeroMenu() {
                 {item.icon}
               </motion.div>
               <span className={`relative ${
-                selectedItem === item.label ? 'after:content-[\'\'] after:absolute after:bottom-0 after:left-0 after:w-1/2 after:h-0.5 after:bg-white after:rounded-full' : ''
+                selectedItem === item.label ? 'after:content-[\'\'] after:absolute after:bottom-0 after:left-1/3 after:w-1/3 after:h-0.5 after:bg-white after:rounded-full' : ''
               }`}>
                 {item.label}
               </span>

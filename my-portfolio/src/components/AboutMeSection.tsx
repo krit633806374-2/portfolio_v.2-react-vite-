@@ -161,7 +161,7 @@ export default function AboutMeSection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true, margin: '-100px' }}
+          viewport={{ once: false, margin: '-100px' }}
           className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
         >
           {/* Left Content */}
@@ -169,7 +169,7 @@ export default function AboutMeSection() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
+            viewport={{ once: false, margin: '-100px' }}
             className="flex flex-col gap-3 pt-5"
           >
             {/* Greeting */}
@@ -185,7 +185,14 @@ export default function AboutMeSection() {
             </motion.div>
 
             {/* Divider Line */}
-            <div className="h-0.5 w-16 bg-gradient-to-r from-white/40 to-transparent"></div>
+            <motion.div 
+              className="h-0.5 w-16 bg-gradient-to-r from-white/40 to-transparent"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              viewport={{ once: false, margin: '-100px' }}
+              style={{ originX: 0 }}
+            />
 
             {/* Skills Tag - Typing Animation */}
             <motion.div variants={leftVariants}>
@@ -230,9 +237,22 @@ export default function AboutMeSection() {
 
                 <div className="relative z-10">
                   <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2 group-hover:text-cyan-400 transition-colors duration-300">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <motion.svg 
+                      className="w-5 h-5" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                      animate={{ 
+                        filter: ['drop-shadow(0 0 0px rgba(34, 197, 234, 0))', 'drop-shadow(0 0 8px rgba(34, 197, 234, 0.6))', 'drop-shadow(0 0 0px rgba(34, 197, 234, 0))']
+                      }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        ease: 'easeInOut'
+                      }}
+                    >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5m0 0l9 5m-9-5v10l9 5m0 0l9-5m-9 5v-10m0 0l-9-5" />
-                    </svg>
+                    </motion.svg>
                     Education
                   </h3>
                   <div className="space-y-2">
@@ -263,9 +283,23 @@ export default function AboutMeSection() {
 
                 <div className="relative z-10">
                   <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2 group-hover:text-cyan-400 transition-colors duration-300">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <motion.svg 
+                      className="w-5 h-5" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                      animate={{ 
+                        filter: ['drop-shadow(0 0 0px rgba(34, 197, 234, 0))', 'drop-shadow(0 0 8px rgba(34, 197, 234, 0.6))', 'drop-shadow(0 0 0px rgba(34, 197, 234, 0))']
+                      }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                        delay: 0.5
+                      }}
+                    >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
+                    </motion.svg>
                     Interests
                   </h3>
                   <div className="space-y-1">
