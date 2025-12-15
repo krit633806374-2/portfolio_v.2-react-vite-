@@ -1,8 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { useState, useEffect, useMemo } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState, useEffect, useMemo, useRef } from 'react';
 
 export default function AboutMeSection() {
   const [displayText, setDisplayText] = useState('');
@@ -10,8 +10,22 @@ export default function AboutMeSection() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  const skills = useMemo(() => ['DEVELOP', 'CREATE', 'College of Computing Student'], []);
+  const { scrollYProgress } = useScroll({
+    target: scrollRef,
+    offset: ['start center', 'end center'],
+  });
+
+  // Image scroll animation - enters from bottom-right, exits to top-left
+  // Tilted at 15 degrees when at About Me section (scroll progress 0.5)
+  const imageX = useTransform(scrollYProgress, [0, 0.5, 1], [300, 0, -300]);
+  const imageY = useTransform(scrollYProgress, [0, 0.5, 1], [300, 0, -300]);
+  const imageRotate = useTransform(scrollYProgress, [0, 0.5, 1], [0, 15, 360]);
+  const imageRotateY = useTransform(scrollYProgress, [0, 0.5, 1], [0, 15, 0]);
+  const imageOpacity = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.8, 1], [0, 1, 1, 1, 0]);
+
+  const skills = useMemo(() => ['College of Computing Student','UX/UI designer', 'Web Developer', 'Front-end Developer'], []);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -110,6 +124,7 @@ export default function AboutMeSection() {
   return (
     <>
       <section 
+        ref={scrollRef}
         data-section="about"
         className="relative w-full min-h-screen bg-transparent flex items-center justify-center py-20 px-6"
       >
@@ -120,7 +135,7 @@ export default function AboutMeSection() {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: '-100px' }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
           {/* Title, Line, and Description - All in One Container */}
           <motion.div
@@ -147,7 +162,7 @@ export default function AboutMeSection() {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
         >
           {/* Left Content */}
           <motion.div
@@ -155,15 +170,15 @@ export default function AboutMeSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-100px' }}
-            className="flex flex-col gap-6"
+            className="flex flex-col gap-3 pt-5"
           >
             {/* Greeting */}
             <motion.div variants={leftVariants}>
               <div className="space-y-2">
-                <p className="text-xl md:text-2xl font-semibold text-gray-300">
+                <p className="text-2xl md:text-3xl font-semibold text-gray-300">
                   Hello, I&apos;m
                 </p>
-                <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
+                <h2 className="text-4xl md:text-7xl font-black text-white leading-tight">
                   Krit<br />Intarajinda
                 </h2>
               </div>
@@ -174,7 +189,7 @@ export default function AboutMeSection() {
 
             {/* Skills Tag - Typing Animation */}
             <motion.div variants={leftVariants}>
-              <div className="text-white text-lg md:text-2xl min-h-8" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+              <div className="text-white text-2xl md:text-3xl min-h-8" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
                 {displayText}
                 <motion.span
                   animate={{ opacity: [1, 0] }}
@@ -187,56 +202,86 @@ export default function AboutMeSection() {
             </motion.div>
 
             {/* Description */}
-            <motion.div variants={leftVariants} className="pt-4">
-              <p className="text-gray-400 text-sm leading-relaxed text-justify">
+            <motion.div variants={leftVariants} className="pt-0">
+              <p className="text-gray-400 text-base md:text-lg leading-relaxed text-justify">
                 &nbsp;&nbsp;&nbsp;&nbsp;นักศึกษาสาขาวิทยาการคอมพิวเตอร์ คณะวิทยาลัยการคอมพิวเตอร์ มหาวิทยาลัยขอนแก่น ผู้มีความสนใจด้าน Frontend Developer ชื่นชอบการเรียนรู้และทดลองใช้เครื่องมือใหม่ ๆ เพื่อพัฒนาเว็บไซต์ให้มีลูกเล่น ทันสมัย และตอบโจทย์การใช้งานจริง
               </p>
             </motion.div>
 
             {/* Education & Interests Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-0">
               {/* Education Card */}
               <motion.div
                 variants={leftVariants}
-                className="p-6 rounded-2xl border border-white/20 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm hover:border-white/40 transition-colors duration-300"
+                whileHover={{ 
+                  y: -8,
+                  boxShadow: '0 20px 40px rgba(34, 197, 234, 0.2)',
+                }}
+                transition={{ duration: 0.3 }}
+                className="relative p-6 rounded-2xl border border-white/20 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 group cursor-pointer overflow-hidden"
               >
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5m0 0l9 5m-9-5v10l9 5m0 0l9-5m-9 5v-10m0 0l-9-5" />
-                  </svg>
-                  Education
-                </h3>
-                <div className="space-y-2">
-                  <p className="font-semibold text-white text-sm">Computer Science</p>
-                  <p className="text-gray-400 text-xs">Khon Kaen University</p>
-                  <p className="text-gray-500 text-xs mt-2">Year 3</p>
+                {/* Glow effect on hover */}
+                <motion.div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                  style={{
+                    background: 'radial-gradient(circle at center, rgba(34, 197, 234, 0.1) 0%, transparent 70%)',
+                  }}
+                />
+
+                <div className="relative z-10">
+                  <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2 group-hover:text-cyan-400 transition-colors duration-300">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5m0 0l9 5m-9-5v10l9 5m0 0l9-5m-9 5v-10m0 0l-9-5" />
+                    </svg>
+                    Education
+                  </h3>
+                  <div className="space-y-2">
+                    <p className="font-semibold text-white text-sm">Computer Science</p>
+                    <p className="text-gray-400 text-xs">Khon Kaen University</p>
+                    <p className="text-gray-500 text-xs mt-2">Year 3</p>
+                  </div>
                 </div>
               </motion.div>
 
               {/* Interests Card */}
               <motion.div
                 variants={leftVariants}
-                className="p-6 rounded-2xl border border-white/20 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm hover:border-white/40 transition-colors duration-300"
+                whileHover={{ 
+                  y: -8,
+                  boxShadow: '0 20px 40px rgba(34, 197, 234, 0.2)',
+                }}
+                transition={{ duration: 0.3 }}
+                className="relative p-6 rounded-2xl border border-white/20 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 group cursor-pointer overflow-hidden"
               >
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                  Interests
-                </h3>
-                <div className="space-y-1">
-                  <p className="text-gray-400 text-xs flex items-center gap-2">
-                    <span className="text-cyan-400">•</span>
-                    Frontend Development
-                  </p>
-                  <p className="text-gray-400 text-xs flex items-center gap-2">
-                    <span className="text-cyan-400">•</span>
-                    UI/UX Design
-                  </p>
-                  <p className="text-gray-400 text-xs flex items-center gap-2">
-                    <span className="text-cyan-400">•</span>
-                    Web Innovation
-                  </p>
+                {/* Glow effect on hover */}
+                <motion.div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                  style={{
+                    background: 'radial-gradient(circle at center, rgba(34, 197, 234, 0.1) 0%, transparent 70%)',
+                  }}
+                />
+
+                <div className="relative z-10">
+                  <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2 group-hover:text-cyan-400 transition-colors duration-300">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    Interests
+                  </h3>
+                  <div className="space-y-1">
+                    <p className="text-gray-400 text-xs flex items-center gap-2 group-hover:text-gray-300 transition-colors duration-300">
+                      <span className="text-cyan-400">•</span>
+                      Frontend Development
+                    </p>
+                    <p className="text-gray-400 text-xs flex items-center gap-2 group-hover:text-gray-300 transition-colors duration-300">
+                      <span className="text-cyan-400">•</span>
+                      UI/UX Design
+                    </p>
+                    <p className="text-gray-400 text-xs flex items-center gap-2 group-hover:text-gray-300 transition-colors duration-300">
+                      <span className="text-cyan-400">•</span>
+                      Web Innovation
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             </div>
@@ -259,11 +304,15 @@ export default function AboutMeSection() {
           >
             {/* Interactive Image Container */}
             <motion.div
-              className="relative w-full max-w-sm"
+              className="relative w-full max-w-2xl z-0"
               style={{
                 rotateX: isHovering ? rotateX : 0,
-                rotateY: isHovering ? rotateY : 0,
+                rotateY: isHovering ? rotateY : imageRotateY,
                 transformStyle: 'preserve-3d',
+                x: imageX,
+                y: imageY,
+                rotate: imageRotate,
+                opacity: imageOpacity,
               }}
               transition={{ type: 'spring', stiffness: 400, damping: 30 }}
             >
@@ -285,13 +334,7 @@ export default function AboutMeSection() {
               ></motion.div>
 
               {/* Main Image Card */}
-              <motion.div
-                className="relative rounded-3xl overflow-hidden border-2 border-white/30 bg-gradient-to-br from-gray-900 to-black shadow-2xl"
-                whileHover={{
-                  borderColor: 'rgba(255, 255, 255, 0.6)',
-                }}
-                transition={{ duration: 0.3 }}
-              >
+              <motion.div>
                 {/* Image */}
                 <motion.div
                   className="relative w-full overflow-hidden"
@@ -300,47 +343,16 @@ export default function AboutMeSection() {
                   style={{ aspectRatio: '3 / 5' }}
                 >
                   <Image
-                    src="/aboutme.jpg"
+                    src="/meincamera.png"
                     alt="Krit Intarajinda"
                     width={300}
-                    height={500}
+                    height={630}
                     priority
                     className="w-full h-full object-cover object-top"
                   />
-                  
-                  {/* Overlay Gradient */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
-                    whileHover={{ opacity: 0 }}
-                  ></motion.div>
                 </motion.div>
-
-                {/* Info Badge - Floating */}
-                <motion.div
-                  className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/95 via-black/70 to-transparent"
-                  initial={{ y: 20, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.3, duration: 0.6 }}
-                >
-                  <h3 className="text-2xl font-black text-white mb-1">Krit Intarajinda</h3>
-                  <p className="text-white font-semibold text-sm">Frontend Developer</p>
-                </motion.div>
-
-                {/* Shine Effect */}
-                <motion.div
-                  animate={{
-                    opacity: [0, 0.5, 0],
-                    x: [-200, 400, -200],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: 'linear',
-                  }}
-                  className="absolute -inset-full bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none"
-                ></motion.div>
               </motion.div>
-
+                  
               {/* Floating Particles/Dots */}
               <motion.div
                 animate={{ 
