@@ -294,7 +294,7 @@ export default function AboutMeSection() {
             whileInView="visible"
             transition={{ duration: 0.8 }}
             viewport={{ once: true, margin: '-100px' }}
-            className="relative h-full flex items-center justify-center"
+            className="relative h-full flex items-start justify-center -mt-16"
             style={{
               perspective: '1200px',
             }}
@@ -304,7 +304,7 @@ export default function AboutMeSection() {
           >
             {/* Interactive Image Container */}
             <motion.div
-              className="relative w-full max-w-2xl z-0"
+              className="relative w-full max-w-sm z-0"
               style={{
                 rotateX: isHovering ? rotateX : 0,
                 rotateY: isHovering ? rotateY : imageRotateY,
@@ -345,8 +345,8 @@ export default function AboutMeSection() {
                   <Image
                     src="/meincamera.png"
                     alt="Krit Intarajinda"
-                    width={300}
-                    height={630}
+                    width={380}
+                    height={798}
                     priority
                     className="w-full h-full object-cover object-top"
                   />
