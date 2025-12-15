@@ -475,7 +475,9 @@ export default function AboutMeSection() {
                 { name: 'React', icon: 'react.png' },
                 { name: 'Next.JS', icon: 'next.png' },
                 { name: 'Tailwind CSS', icon: 'tw.png' },
+                { name: 'Vite', icon: 'vt.png', scale: '1.7' },
                 { name: 'VS Code', icon: 'vscode.png' },
+                { name: 'Vercel', icon: 'vercel.png' },
                 { name: 'GitHub', icon: 'gh.png' }
               ].map((tool, idx) => (
                 <div key={idx} className="flex flex-col items-center gap-3">
@@ -484,7 +486,7 @@ export default function AboutMeSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.05 }}
                     whileHover={{ y: -8 }}
-                    className="relative p-6 rounded-2xl border border-gray-500 bg-gradient-to-br from-gray-800 to-gray-900 hover:border-gray-400 transition-all duration-300 cursor-pointer overflow-hidden w-32 h-32 flex items-center justify-center"
+                    className="relative p-6 rounded-2xl border border-gray-300 bg-gradient-to-br from-gray-100 to-gray-250 hover:border-gray-400 transition-all duration-300 cursor-pointer overflow-hidden w-32 h-32 flex items-center justify-center"
                   >
                     <Image
                       src={`/${tool.icon}`}
@@ -495,7 +497,7 @@ export default function AboutMeSection() {
                       style={{ transform: tool.scale ? `scale(${tool.scale})` : 'scale(1)' }}
                     />
                   </motion.div>
-                  <p className="text-sm font-light text-white text-center whitespace-nowrap">{tool.name}</p>
+                  <p className="text-sm font-light text-gray-400 text-center whitespace-nowrap">{tool.name}</p>
                 </div>
               ))}
             </div>
@@ -529,7 +531,7 @@ export default function AboutMeSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.05 }}
                     whileHover={{ y: -8 }}
-                    className="relative p-6 rounded-2xl border border-gray-500 bg-gradient-to-br from-gray-800 to-gray-900 hover:border-gray-400 transition-all duration-300 cursor-pointer overflow-hidden w-32 h-32 flex items-center justify-center"
+                    className="relative p-6 rounded-2xl border border-gray-300 bg-gradient-to-br from-gray-100 to-gray-250 hover:border-gray-400 transition-all duration-300 cursor-pointer overflow-hidden w-32 h-32 flex items-center justify-center"
                   >
                     <Image
                       src={`/${tool.icon}`}
@@ -539,7 +541,7 @@ export default function AboutMeSection() {
                       className="w-24 h-24 object-contain"
                     />
                   </motion.div>
-                  <p className="text-sm font-light text-white text-center whitespace-nowrap">{tool.name}</p>
+                  <p className="text-sm font-light text-gray-400 text-center whitespace-nowrap">{tool.name}</p>
                 </div>
               ))}
             </div>
