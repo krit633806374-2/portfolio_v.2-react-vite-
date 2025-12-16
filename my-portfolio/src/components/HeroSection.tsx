@@ -1,12 +1,7 @@
-import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function HeroSection() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start start', 'end start']
-  });
+  const { scrollYProgress } = useScroll();
 
   // Initial entry animations
   const webInitialX = 1000; // Start from right
@@ -17,7 +12,7 @@ export default function HeroSection() {
   const profileOpacity = useTransform(scrollYProgress, [0.1, 0.2], [1, 0.2]);
 
   return (
-    <div ref={ref} className="relative w-full h-auto bg-transparent overflow-hidden flex flex-col items-center justify-start pt-16 pb-4">
+    <div className="relative w-full h-auto bg-transparent overflow-hidden flex flex-col items-center justify-start pt-16 pb-4">
       {/* Text and Image Container */}
       <div className="relative w-full flex flex-col items-center justify-start">
         {/* Text Overlay - "Web" and "Designer" */}

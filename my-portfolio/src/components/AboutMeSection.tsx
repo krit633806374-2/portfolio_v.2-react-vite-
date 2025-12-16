@@ -34,7 +34,7 @@ export default function AboutMeSection() {
       if (displayText.length < currentSkill.length) {
         timer = setTimeout(() => {
           setDisplayText(currentSkill.substring(0, displayText.length + 1));
-        }, 80);
+        }, 120); // Increased from 80
       } else {
         // Wait before deleting
         timer = setTimeout(() => {
@@ -46,7 +46,7 @@ export default function AboutMeSection() {
       if (displayText.length > 0) {
         timer = setTimeout(() => {
           setDisplayText(displayText.substring(0, displayText.length - 1));
-        }, 50);
+        }, 80); // Increased from 50
       } else {
         // Move to next skill with timeout to avoid state batching issues
         timer = setTimeout(() => {
@@ -145,8 +145,8 @@ export default function AboutMeSection() {
           >
             {/* Title with Icon and Underline */}
             <div className="inline-block w-full">
-              <div className="flex items-center justify-center gap-3 mb-2">
-                <h1 className="text-6xl md:text-7xl font-black text-white">
+              <div className="flex items-center justify-right gap-3 mb-2">
+                <h1 className="text-6xl md:text-9xl font-black text-white">
                   About Me
                 </h1>
               </div>
@@ -441,7 +441,7 @@ export default function AboutMeSection() {
             viewport={{ once: true, margin: '-100px' }}
             className="text-center mb-20"
           >
-            <h1 className="text-6xl md:text-7xl font-black text-white">
+            <h1 className="text-6xl md:text-9xl font-black text-white">
               Skills
             </h1>
           </motion.div>
@@ -463,14 +463,39 @@ export default function AboutMeSection() {
             
             <p className="text-xl md:text-2xl font-semibold text-cyan-400 mb-6 indent-8">Stack & Technologies</p>
             
-            <div className="flex flex-wrap gap-8 justify-left">
+            {/* First Row - 6 items */}
+            <div className="flex flex-wrap gap-6 mb-8" style={{ maxWidth: 'calc(6 * (128px + 32px))' }}>
               {[
                 { name: 'HTML', icon: 'html.png' },
                 { name: 'CSS', icon: 'css.png' },
                 { name: 'JavaScript', icon: 'jss.png', scale: '0.6' },
                 { name: 'TypeScript', icon: 'ts.png' },
-                { name: 'React', icon: 'react.png' },
+                { name: 'React', icon: 'rc.png' },
                 { name: 'Next.JS', icon: 'next.png' },
+              ].map((tool, idx) => (
+                <div key={idx} className="flex flex-col items-center gap-3">
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.05 }}
+                    whileHover={{ y: -8 }}
+                    className="relative p-6 rounded-2xl border border-gray-300 bg-gradient-to-br from-gray-100 to-gray-250 hover:border-gray-400 transition-all duration-300 cursor-pointer overflow-hidden w-32 h-32 flex items-center justify-center"
+                  >
+                    <img
+                      src={`/${tool.icon}`}
+                      alt={tool.name}
+                      className="w-24 h-24 object-contain"
+                      style={{ transform: tool.scale ? `scale(${tool.scale})` : 'scale(1)' }}
+                    />
+                  </motion.div>
+                  <p className="text-sm font-light text-gray-400 text-center whitespace-nowrap">{tool.name}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Second Row - 5 items */}
+            <div className="flex flex-wrap gap-6 justify-left">
+              {[
                 { name: 'Tailwind CSS', icon: 'tw.png' },
                 { name: 'Vite', icon: 'vt.png', scale: '1.7' },
                 { name: 'VS Code', icon: 'vscode.png' },
@@ -481,7 +506,7 @@ export default function AboutMeSection() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: idx * 0.05 }}
+                    transition={{ delay: (idx + 6) * 0.05 }}
                     whileHover={{ y: -8 }}
                     className="relative p-6 rounded-2xl border border-gray-300 bg-gradient-to-br from-gray-100 to-gray-250 hover:border-gray-400 transition-all duration-300 cursor-pointer overflow-hidden w-32 h-32 flex items-center justify-center"
                   >
@@ -514,7 +539,7 @@ export default function AboutMeSection() {
             
             <p className="text-xl md:text-2xl font-semibold text-cyan-400 mb-6 indent-8">Tools & Platforms</p>
             
-            <div className="flex flex-wrap gap-8 justify-left">
+            <div className="flex flex-wrap gap-6 justify-left">
               {[
                 { name: 'Wix', icon: 'wixx.png' },
                 { name: 'Figma', icon: 'fm.png' },

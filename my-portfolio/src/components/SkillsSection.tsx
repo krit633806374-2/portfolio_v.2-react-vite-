@@ -19,8 +19,7 @@ export default function SkillsSection() {
   const toolsItems = [
     { name: 'VS Code', icon: '/vs code.png', color: 'from-blue-500/20 to-blue-600/20' },
     { name: 'GitHub', icon: '/github.png', color: 'from-gray-500/20 to-gray-700/20' },
-    { name: 'Figma', icon: '/figma.png', color: 'from-purple-500/20 to-pink-600/20' },
-    { name: 'Canva', icon: '/canva.png', color: 'from-blue-500/20 to-purple-600/20' },
+
   ];
 
   const containerVariants = {
@@ -90,16 +89,6 @@ export default function SkillsSection() {
       className="relative w-full min-h-screen bg-transparent flex items-center justify-center py-20 px-6"
     >
       <div className="max-w-7xl w-full">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true, margin: '-100px' }}
-          className="text-center mb-16"
-        >
-          <h1 className="text-6xl md:text-7xl font-black text-white">Skills</h1>
-        </motion.div>
 
         {/* Skills Container */}
         <motion.div

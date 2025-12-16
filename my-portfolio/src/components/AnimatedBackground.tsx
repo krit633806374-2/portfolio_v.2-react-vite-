@@ -1,12 +1,8 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
 
 export default function AnimatedBackground() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start start', 'end end']
-  });
+  // Use global scroll position instead of target element
+  const { scrollYProgress } = useScroll();
 
   // Create smooth scroll-based transformations with stronger parallax effect
   const translateY1 = useTransform(scrollYProgress, [0, 1], [0, 300]);

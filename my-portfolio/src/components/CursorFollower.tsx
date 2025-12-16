@@ -4,6 +4,7 @@ export default function CursorFollower() {
   const followerRef = useRef<HTMLDivElement>(null);
   const [trail, setTrail] = useState<{ x: number; y: number; id: number }[]>([]);
   const trailIdRef = useRef(0);
+  const lastUpdateRef = useRef(0);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -11,6 +12,11 @@ export default function CursorFollower() {
         followerRef.current.style.left = e.clientX + 'px';
         followerRef.current.style.top = e.clientY + 'px';
       }
+
+      // Throttle trail updates to reduce re-renders
+      const now = Date.now();
+      if (now - lastUpdateRef.current < 16) return; // ~60fps
+      lastUpdateRef.current = now;
 
       // Add trail particle
       const id = trailIdRef.current++;
