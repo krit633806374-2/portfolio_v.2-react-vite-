@@ -1,6 +1,3 @@
-'use client';
-
-import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useState, useEffect, useMemo, useRef } from 'react';
 
@@ -488,11 +485,9 @@ export default function AboutMeSection() {
                     whileHover={{ y: -8 }}
                     className="relative p-6 rounded-2xl border border-gray-300 bg-gradient-to-br from-gray-100 to-gray-250 hover:border-gray-400 transition-all duration-300 cursor-pointer overflow-hidden w-32 h-32 flex items-center justify-center"
                   >
-                    <Image
+                    <img
                       src={`/${tool.icon}`}
                       alt={tool.name}
-                      width={86}
-                      height={86}
                       className="w-24 h-24 object-contain"
                       style={{ transform: tool.scale ? `scale(${tool.scale})` : 'scale(1)' }}
                     />
@@ -533,11 +528,9 @@ export default function AboutMeSection() {
                     whileHover={{ y: -8 }}
                     className="relative p-6 rounded-2xl border border-gray-300 bg-gradient-to-br from-gray-100 to-gray-250 hover:border-gray-400 transition-all duration-300 cursor-pointer overflow-hidden w-32 h-32 flex items-center justify-center"
                   >
-                    <Image
+                    <img
                       src={`/${tool.icon}`}
                       alt={tool.name}
-                      width={86}
-                      height={86}
                       className="w-24 h-24 object-contain"
                     />
                   </motion.div>

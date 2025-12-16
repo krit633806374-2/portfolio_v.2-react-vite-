@@ -1,6 +1,3 @@
-'use client';
-
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 interface SkillItem {
@@ -34,15 +31,6 @@ export default function SkillsSection() {
         staggerChildren: 0.1,
         delayChildren: 0.2,
       },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
     },
   };
 
@@ -82,11 +70,9 @@ export default function SkillsSection() {
 
       {/* Icon Container */}
       <div className="relative h-16 w-16 mb-4 mx-auto">
-        <Image
+        <img
           src={item.icon}
           alt={item.name}
-          width={64}
-          height={64}
           className="w-full h-full object-contain filter drop-shadow-lg"
         />
       </div>
@@ -104,7 +90,16 @@ export default function SkillsSection() {
       className="relative w-full min-h-screen bg-transparent flex items-center justify-center py-20 px-6"
     >
       <div className="max-w-7xl w-full">
-  
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true, margin: '-100px' }}
+          className="text-center mb-16"
+        >
+          <h1 className="text-6xl md:text-7xl font-black text-white">Skills</h1>
+        </motion.div>
 
         {/* Skills Container */}
         <motion.div
@@ -115,6 +110,24 @@ export default function SkillsSection() {
           className="space-y-16"
         >
           {/* Stack Section */}
+          <div>
+            <h2 className="text-3xl font-bold text-white mb-8">Tech Stack</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {stackItems.map((item, index) => (
+                <SkillCard key={item.name} item={item} index={index} />
+              ))}
+            </div>
+          </div>
+
+          {/* Tools Section */}
+          <div>
+            <h2 className="text-3xl font-bold text-white mb-8">Tools & Platforms</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {toolsItems.map((item, index) => (
+                <SkillCard key={item.name} item={item} index={index} />
+              ))}
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

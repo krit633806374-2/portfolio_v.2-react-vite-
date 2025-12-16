@@ -1,15 +1,18 @@
-'use client';
-
-import { motion, useViewportScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
 export default function AnimatedBackground() {
-  const { scrollY } = useViewportScroll();
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end end']
+  });
 
   // Create smooth scroll-based transformations with stronger parallax effect
-  const translateY1 = useTransform(scrollY, [0, 1000], [0, 300]);
-  const translateY2 = useTransform(scrollY, [0, 1000], [0, -300]);
-  const translateY3 = useTransform(scrollY, [0, 1000], [0, 250]);
-  const translateY4 = useTransform(scrollY, [0, 1000], [0, -250]);
+  const translateY1 = useTransform(scrollYProgress, [0, 1], [0, 300]);
+  const translateY2 = useTransform(scrollYProgress, [0, 1], [0, -300]);
+  const translateY3 = useTransform(scrollYProgress, [0, 1], [0, 250]);
+  const translateY4 = useTransform(scrollYProgress, [0, 1], [0, -250]);
 
   return (
     <div className="fixed inset-0 bg-black overflow-hidden z-0">
@@ -41,12 +44,12 @@ export default function AnimatedBackground() {
 
       {/* Additional subtle blobs for more depth */}
       <motion.div
-        style={{ y: useTransform(scrollY, [0, 1000], [0, 350]) }}
+        style={{ y: useTransform(scrollYProgress, [0, 1], [0, 350]) }}
         className="absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-white rounded-full filter blur-3xl opacity-4"
       />
 
       <motion.div
-        style={{ y: useTransform(scrollY, [0, 1000], [0, -280]) }}
+        style={{ y: useTransform(scrollYProgress, [0, 1], [0, -280]) }}
         className="absolute top-1/3 right-1/3 w-[500px] h-[500px] bg-white rounded-full filter blur-3xl opacity-5"
       />
     </div>

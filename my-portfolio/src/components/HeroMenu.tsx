@@ -1,7 +1,5 @@
-'use client';
-
 import { useState, useEffect } from 'react';
-import { motion, useViewportScroll } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const menuItems = [
   { 
@@ -41,20 +39,22 @@ const menuItems = [
 export default function HeroMenu() {
   const [isOpen, setIsOpen] = useState(true); // Start open
   const [selectedItem, setSelectedItem] = useState('Home');
-  const { scrollY } = useViewportScroll();
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    // Close menu after scroll passes 600px
-    const unsubscribe = scrollY.onChange((latest) => {
-      if (latest > 600) {
+    // Track scroll position
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+      if (window.scrollY > 600) {
         setIsOpen(false);
       } else {
         setIsOpen(true);
       }
-    });
+    };
 
-    return () => unsubscribe();
-  }, [scrollY]);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <motion.div
@@ -67,7 +67,7 @@ export default function HeroMenu() {
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => {
           // Only auto close if scrolled past threshold
-          if (scrollY.get && scrollY.get() > 600) {
+          if (scrollY > 600) {
             setIsOpen(false);
           }
         }}

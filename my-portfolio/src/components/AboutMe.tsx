@@ -1,6 +1,3 @@
-'use client';
-
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 export default function AboutMe() {
@@ -43,16 +40,14 @@ export default function AboutMe() {
           >
             <div className="absolute inset-0 bg-cyan-500/30 rounded-full blur-2xl w-32 h-32 mx-auto"></div>
             <div className="relative w-32 h-32 rounded-full border-4 border-cyan-500 overflow-hidden bg-gradient-to-br from-cyan-500/20 to-transparent p-1">
-              <Image
+              <img
                 src="/profile1.png"
                 alt="Profile"
-                width={120}
-                height={120}
                 className="w-full h-full object-cover rounded-full"
               />
             </div>
-
-        {/* Who I Am Section */}
+          </motion.div>
+        </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

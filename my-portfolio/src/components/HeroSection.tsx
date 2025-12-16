@@ -1,21 +1,23 @@
-'use client';
-
-import Image from 'next/image';
-import { motion, useViewportScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function HeroSection() {
-  const { scrollY } = useViewportScroll();
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end start']
+  });
 
   // Initial entry animations
   const webInitialX = 1000; // Start from right
   const designerInitialX = -1000; // Start from left
   
   // Profile image scroll transform - moves down when scrolling
-  const profileTranslateY = useTransform(scrollY, [0, 400], [0, 600]);
-  const profileOpacity = useTransform(scrollY, [200, 400], [1, 0]);
+  const profileTranslateY = useTransform(scrollYProgress, [0, 0.2], [0, 300]);
+  const profileOpacity = useTransform(scrollYProgress, [0.1, 0.2], [1, 0.2]);
 
   return (
-    <div className="relative w-full h-auto bg-transparent overflow-hidden flex flex-col items-center justify-start pt-16 pb-4">
+    <div ref={ref} className="relative w-full h-auto bg-transparent overflow-hidden flex flex-col items-center justify-start pt-16 pb-4">
       {/* Text and Image Container */}
       <div className="relative w-full flex flex-col items-center justify-start">
         {/* Text Overlay - "Web" and "Designer" */}
@@ -25,7 +27,7 @@ export default function HeroSection() {
             initial={{ x: webInitialX }}
             animate={{ x: 0 }}
             transition={{ duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-            style={{ x: useTransform(scrollY, [0, 500], [0, -1000]) }}
+            style={{ x: useTransform(scrollYProgress, [0, 0.3], [0, -500]) }}
             className="absolute top-16"
           >
             <h1 className="text-[160px] font-black text-white leading-none whitespace-nowrap drop-shadow-2xl">
@@ -38,7 +40,7 @@ export default function HeroSection() {
             initial={{ x: designerInitialX }}
             animate={{ x: 0 }}
             transition={{ duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-            style={{ x: useTransform(scrollY, [0, 500], [0, 1000]) }}
+            style={{ x: useTransform(scrollYProgress, [0, 0.3], [0, 500]) }}
             className="absolute top-52"
           >
             <h1 className="text-[160px] font-black text-white leading-none whitespace-nowrap drop-shadow-2xl">
@@ -54,12 +56,11 @@ export default function HeroSection() {
         >
           {/* Image */}
           <div className="relative w-fit">
-            <Image
+            <img
               src="/profile1.png"
               alt="Profile"
               width={400}
               height={500}
-              priority
               className="object-cover"
             />
 
