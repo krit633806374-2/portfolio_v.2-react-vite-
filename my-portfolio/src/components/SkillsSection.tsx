@@ -1,45 +1,23 @@
 import { motion } from 'framer-motion';
 
 export default function SkillsSection() {
-  const stackItems = [
-    { name: 'HTML', icon: 'html.png' },
-    { name: 'CSS', icon: 'css.png' },
-    { name: 'JavaScript', icon: 'jss.png', scale: '0.6' },
-    { name: 'TypeScript', icon: 'ts.png' },
-    { name: 'React', icon: 'rc.png' },
-    { name: 'Next.JS', icon: 'next.png' },
-  ];
-
-  const toolItems = [
-    { name: 'Tailwind CSS', icon: 'tw.png' },
-    { name: 'Vite', icon: 'vt.png', scale: '1.7' },
-    { name: 'Vercel', icon: 'vercel.png' },
-  ];
-
-  const createItems = [
-    { name: 'Capcut', icon: 'capcut.png' },
-    { name: 'Wix', icon: 'wixx.png' },
-    { name: 'Figma', icon: 'fm.png' },
-    { name: 'Canva', icon: 'canva.png' },
-    { name: 'GitHub', icon: 'gh.png' },
-
-  ];
-
   return (
     <section
       data-section="skills"
-      className="relative w-full bg-transparent flex items-center justify-center py-20 px-6"
+  className="relative w-full bg-transparent flex items-center justify-center pt-12 pb-16 px-6 scroll-mt-0"
     >
       <div className="max-w-7xl w-full">
+        {/* Skills Header */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: '-100px' }}
-          className="text-right mb-8 relative"
+          className="text-right mb-3 relative"
         >
           <div className="relative inline-block">
             <h1 className="text-6xl md:text-9xl font-black text-white">Skills</h1>
+            {/* Blue underline with extend animation */}
             <motion.div
               initial={{ scaleX: 0, originX: 1 }}
               whileInView={{ scaleX: 1 }}
@@ -51,96 +29,119 @@ export default function SkillsSection() {
           </div>
         </motion.div>
 
+        {/* DEVELOP Section */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: '-100px' }}
-          className="mb-6"
+          className="mb-2"
         >
-          <h2 className="text-3xl md:text-5xl font-black text-white mb-2">DEVELOP</h2>
+          <h2 className="text-3xl md:text-4xl font-black text-white mb-1">DEVELOP</h2>
 
-          <p className="text-gray-400 text-base leading-relaxed mb-2 max-w-3xl indent-8">
+          <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-2 max-w-3xl indent-8">
             Started creating Web Development using Next.js, React, and Tailwind <br />
             and eventually switched to Mobile Development using React Native
           </p>
 
-          <p className="text-xl md:text-2xl font-semibold text-cyan-400 mb-2 indent-8">Stack & Technologies</p>
+          <p className="text-lg md:text-xl font-semibold text-cyan-400 mb-2 indent-8">Stack & Technologies</p>
 
-          <div className="flex flex-wrap gap-4 mb-2" style={{ maxWidth: 'calc(6 * (128px + 32px))' }}>
-            {stackItems.map((tool, idx) => (
+          {/* First Row - 6 items */}
+          <div className="flex flex-wrap gap-3 mb-2" style={{ maxWidth: 'calc(6 * (112px + 24px))' }}>
+            {[
+              { name: 'HTML', icon: 'html.png' },
+              { name: 'CSS', icon: 'css.png' },
+              { name: 'JavaScript', icon: 'jss.png', scale: '0.6' },
+              { name: 'TypeScript', icon: 'ts.png' },
+              { name: 'React', icon: 'rc.png' },
+              { name: 'Next.JS', icon: 'next.png' },
+            ].map((tool, idx) => (
               <div key={idx} className="flex flex-col items-center gap-1">
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.05 }}
                   whileHover={{ y: -8 }}
-                  className="relative p-6 rounded-2xl border border-gray-300 bg-gradient-to-br from-gray-100 to-gray-250 hover:border-gray-400 transition-all duration-300 cursor-pointer overflow-hidden w-32 h-32 flex items-center justify-center"
+                  className="relative p-5 rounded-2xl border border-gray-300 bg-gradient-to-br from-gray-100 to-gray-250 hover:border-gray-400 transition-all duration-300 cursor-pointer overflow-hidden w-28 h-28 flex items-center justify-center"
                 >
                   <img
                     src={`/${tool.icon}`}
                     alt={tool.name}
-                    className="w-24 h-24 object-contain"
+                    className="w-20 h-20 object-contain"
                     style={{ transform: tool.scale ? `scale(${tool.scale})` : 'scale(1)' }}
                   />
                 </motion.div>
-                <p className="text-sm font-light text-gray-400 text-center whitespace-nowrap">{tool.name}</p>
+                <p className="text-xs md:text-sm font-medium text-gray-300 text-center whitespace-nowrap mt-1">{tool.name}</p>
               </div>
             ))}
           </div>
 
-          <div className="flex flex-wrap gap-4 justify-left">
-            {toolItems.map((tool, idx) => (
+          {/* Second Row - 5 items */}
+          <div className="flex flex-wrap gap-3 justify-left">
+            {[
+              { name: 'Tailwind CSS', icon: 'tw.png' },
+              { name: 'Vite', icon: 'vt.png', scale: '1.7' },
+              { name: 'Vercel', icon: 'vercel.png' },
+            ].map((tool, idx) => (
               <div key={idx} className="flex flex-col items-center gap-1">
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: (idx + 6) * 0.05 }}
                   whileHover={{ y: -8 }}
-                  className="relative p-6 rounded-2xl border border-gray-300 bg-gradient-to-br from-gray-100 to-gray-250 hover:border-gray-400 transition-all duration-300 cursor-pointer overflow-hidden w-32 h-32 flex items-center justify-center"
+                  className="relative p-5 rounded-2xl border border-gray-300 bg-gradient-to-br from-gray-100 to-gray-250 hover:border-gray-400 transition-all duration-300 cursor-pointer overflow-hidden w-28 h-28 flex items-center justify-center"
                 >
                   <img
                     src={`/${tool.icon}`}
                     alt={tool.name}
-                    className="w-24 h-24 object-contain"
+                    className="w-20 h-20 object-contain"
                     style={{ transform: tool.scale ? `scale(${tool.scale})` : 'scale(1)' }}
                   />
                 </motion.div>
-                <p className="text-sm font-light text-gray-400 text-center whitespace-nowrap">{tool.name}</p>
+                <p className="text-xs md:text-sm font-medium text-gray-300 text-center whitespace-nowrap mt-1">{tool.name}</p>
               </div>
             ))}
           </div>
         </motion.div>
 
+        {/* CREATE Section */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: '-100px' }}
-          className="mt-2"
+          className="mt-0"
         >
-          <h2 className="text-3xl md:text-5xl font-black text-white mb-2">CREATE</h2>
+          <h2 className="text-3xl md:text-4xl font-black text-white mb-1">CREATE</h2>
 
-          <p className="text-gray-400 text-base leading-relaxed mb-2 max-w-3xl indent-8">
+          <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-2 max-w-3xl indent-8">
             Aspiring content creator and junior developer, passionate about telling <br />
             stories through both words and code. Currently learning and building as I go
           </p>
 
-          <p className="text-xl md:text-2xl font-semibold text-cyan-400 mb-2 indent-8">Tools & Platforms</p>
+          <p className="text-lg md:text-xl font-semibold text-cyan-400 mb-2 indent-8">Tools & Platforms</p>
 
-          <div className="flex flex-wrap gap-4 justify-left">
-            {createItems.map((tool, idx) => (
+          <div className="flex flex-wrap gap-3 justify-left">
+            {[
+              { name: 'Capcut', icon: 'capcut.png' },
+              { name: 'Wix', icon: 'wixx.png' },
+              { name: 'Figma', icon: 'fm.png' },
+              { name: 'Canva', icon: 'canva.png' },
+              { name: 'VS Code', icon: 'vscode.png' },
+              { name: 'GitHub', icon: 'gh.png' },
+              
+            ].map((tool, idx) => (
               <div key={idx} className="flex flex-col items-center gap-1">
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.05 }}
                   whileHover={{ y: -8 }}
-                  className="relative p-6 rounded-2xl border border-gray-300 bg-gradient-to-br from-gray-100 to-gray-250 hover:border-gray-400 transition-all duration-300 cursor-pointer overflow-hidden w-32 h-32 flex items-center justify-center"
+                  className="relative p-5 rounded-2xl border border-gray-300 bg-gradient-to-br from-gray-100 to-gray-250 hover:border-gray-400 transition-all duration-300 cursor-pointer overflow-hidden w-28 h-28 flex items-center justify-center"
                 >
-                  <img src={`/${tool.icon}`} alt={tool.name} className="w-24 h-24 object-contain" />
+                  <img src={`/${tool.icon}`} alt={tool.name} className="w-20 h-20 object-contain" />
                 </motion.div>
-                <p className="text-sm font-light text-gray-400 text-center whitespace-nowrap">{tool.name}</p>
+                <p className="text-xs md:text-sm font-medium text-gray-300 text-center whitespace-nowrap mt-1">{tool.name}</p>
               </div>
             ))}
           </div>

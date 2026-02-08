@@ -19,7 +19,7 @@ export default function App() {
         <HeroSection />
         <QuoteSection />
         <AboutMeSection />
-  <SkillsSection />
+        <SkillsSection />
         
 
       </div>

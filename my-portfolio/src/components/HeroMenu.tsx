@@ -40,36 +40,59 @@ export default function HeroMenu() {
   const [isOpen, setIsOpen] = useState(true); // Start open
   const [selectedItem, setSelectedItem] = useState('Home');
   const [scrollY, setScrollY] = useState(0);
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const prefersHover = window.matchMedia?.('(hover: hover) and (pointer: fine)')?.matches;
+    setIsTouch(!prefersHover);
+  }, []);
 
   useEffect(() => {
     // Track scroll position
     const handleScroll = () => {
       setScrollY(window.scrollY);
-      if (window.scrollY > 600) {
-        setIsOpen(false);
-      } else {
-        setIsOpen(true);
+      if (!isTouch) {
+        if (window.scrollY > 600) {
+          setIsOpen(false);
+        } else {
+          setIsOpen(true);
+        }
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isTouch]);
 
   return (
     <motion.div
-      className="fixed top-6 left-1/2 -translate-x-1/2 z-50"
+      className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] pointer-events-auto"
       initial={false}
     >
       <motion.div
         className="flex items-center gap-0 rounded-full px-6 py-4 cursor-pointer transition-colors"
         style={{ backgroundColor: '#33333366' }}
-        onMouseEnter={() => setIsOpen(true)}
+        onMouseEnter={() => {
+          setIsOpen(true);
+        }}
         onMouseLeave={() => {
-          // Only auto close if scrolled past threshold
-          if (scrollY > 600) {
+          if (!isTouch && scrollY > 600) {
             setIsOpen(false);
           }
+        }}
+        onPointerEnter={(event) => {
+          if (event.pointerType === 'mouse') {
+            setIsOpen(true);
+          }
+        }}
+        onPointerLeave={(event) => {
+          if (event.pointerType === 'mouse' && scrollY > 600) {
+            setIsOpen(false);
+          }
+        }}
+        onClick={() => {
+          if (isTouch) setIsOpen((prev) => !prev);
         }}
         layout
       >
