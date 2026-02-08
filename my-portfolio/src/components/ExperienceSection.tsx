@@ -1,132 +1,25 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Folder from './FolderComponent';
+import { projects } from '@/data/projects';
 
 export default function ExperienceSection() {
   const [activeFilter, setActiveFilter] = useState<'all' | 'design'>('all');
-  const folders = [
-    // Featured Projects
-    {
-      id: 'featured-1',
-      category: 'all',
-      color: '#6a6774',
-      size: 2,
-      title: 'Doctora',
-      techStack: ['Next.js', 'Spring Boot', 'TypeScript', 'PostgresSQL'],
-      papers: []
-    },
-    {
-      id: 'featured-2',
-      category: 'all',
-      color: '#6a6774',
-      size: 2,
-      title: 'Doctora Mobile',
-      techStack: ['React Native', 'TypeScript', 'Expo', 'REST'],
-      papers: []
-    },
-    {
-      id: 'featured-3',
-      category: 'all',
-      color: '#6a6774',
-      size: 2,
-      title: 'Phamacy POS',
-      techStack: ['React', 'Tailwind', 'Prisma'],
-      papers: []
-    },
-        {
-      id: 'featured-4',
-      category: 'all',
-      color: '#6a6774',
-      size: 2,
-      title: 'EatAtHome',
-      techStack: ['Figma', 'Framer'],
-      papers: []
-    },
-    {
-      id: 'featured-5',
-      category: 'all',
-      color: '#6a6774',
-      size: 2,
-      title: 'FaceCheck',
-      techStack: ['Figma', 'Illustrator'],
-      papers: []
-    },
-    {
-      id: 'featured-6',
-      category: 'all',
-      color: '#6a6774',
-      size: 2,
-      title: 'Real Time Chat',
-      techStack: ['Photoshop', 'After Effects'],
-      papers: []
-    },
-    // Design Projects
-        {
-      id: 'design-1',
-      category: 'design',
-      color: '#6a6774',
-      size: 2,
-      title: 'Doctora',
-      techStack: ['Figma'],
-      papers: []
-    },
-    {
-      id: 'design-2',
-      category: 'design',
-      color: '#6a6774',
-      size: 2,
-      title: 'Doctora Mobile',
-      techStack: ['Figma'],
-      papers: []
-    },
-    {
-      id: 'design-3',
-      category: 'design',
-      color: '#6a6774',
-      size: 2,
-      title: 'Eat At Home',
-      techStack: ['Figma','Canva'],
-      papers: []
-    },
-    {
-      id: 'design-4',
-      category: 'design',
-      color: '#6a6774',
-      size: 2,
-      title: 'Elite Tutor',
-      techStack: ['Figma'],
-      papers: []
-    },
-    {
-      id: 'design-5',
-      category: 'design',
-      color: '#6a6774',
-      size: 2,
-      title: 'Laundry Tracker',
-      techStack: ['Figma'],
-      papers: []
-    },
-        {
-      id: 'design-6',
-      category: 'design',
-      color: '#6a6774',
-      size: 2,
-      title: 'Real Time Chat',
-      techStack: ['Figma'],
-      papers: []
-    },
-    
-
-  ];
-
+  const folders = projects.map((project) => ({
+    ...project,
+    color: '#6a6774',
+    size: 2,
+    papers: [] as string[]
+  }));
   const visibleFolders = folders.filter((folder) =>
     activeFilter === 'all' ? folder.category === 'all' : folder.category === 'design'
   );
 
   return (
     <section
-      data-section="experience"
-  className="relative w-full bg-transparent flex items-center justify-center pt-28 pb-40 px-6 scroll-mt-40 md:scroll-mt-48"
+    data-section="experience"
+    className="relative w-full bg-transparent flex items-center justify-center pt-28 pb-40 px-6 scroll-mt-40 md:scroll-mt-48"
     >
       <div className="max-w-7xl w-full">
         <motion.div
@@ -192,17 +85,23 @@ export default function ExperienceSection() {
           </div>
         </motion.div>
         <div className="mt-8 pb-24">
-          <div className="grid gap-x-[25em] gap-y-[23em] grid-cols-2 md:grid-cols-3 mx-auto py-[1em] overflow-visible mt-[15rem] justify-items-start">
+          <div className="grid gap-x-[17em] gap-y-[23em] grid-cols-2 md:grid-cols-3 mx-auto py-[1em] overflow-visible mt-[15rem] justify-items-start">
             {visibleFolders.map((folder) => (
-              <Folder
+              <Link
                 key={folder.id}
-                className="custom-folder"
-                color={folder.color}
-                size={folder.size}
-                title={folder.title}
-                techStack={folder.techStack}
-                paperImages={folder.papers}
-              />
+                to={`/projects/${folder.id}`}
+                aria-label={`View details for ${folder.title}`}
+                className="block"
+              >
+                <Folder
+                  className="custom-folder"
+                  color={folder.color}
+                  size={folder.size}
+                  title={folder.title}
+                  techStack={folder.techStack}
+                  paperImages={folder.papers}
+                />
+              </Link>
             ))}
           </div>
         </div>

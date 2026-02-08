@@ -1,3 +1,4 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HeroMenu from '@/components/HeroMenu';
 import HeroSection from '@/components/HeroSection';
 import QuoteSection from '@/components/QuoteSection';
@@ -8,9 +9,10 @@ import AnimatedBackground from '@/components/AnimatedBackground';
 import ScrollToTop from '@/components/ScrollToTop';
 import CursorFollower from '@/components/CursorFollower';
 import Footer from '@/components/footer';
+import ProjectDetail from '@/pages/ProjectDetail';
+import RouteScrollManager from '@/components/RouteScrollManager';
 
-export default function App() {
-  
+function HomePage() {
   return (
     <div className="relative w-full min-h-screen bg-black flex flex-col">
       <CursorFollower />
@@ -26,5 +28,17 @@ export default function App() {
       </div>
       <Footer />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <RouteScrollManager />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/projects/:projectId" element={<ProjectDetail />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
