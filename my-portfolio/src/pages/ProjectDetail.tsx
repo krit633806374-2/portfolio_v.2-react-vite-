@@ -110,8 +110,8 @@ export default function ProjectDetail() {
                   </div>
                 )}
 
-                <p className="text-white/70 text-lg leading-relaxed max-w-3xl">
-                  <span className="inline-block ml-6">{project.summary}</span>
+                <p className="text-white/70 text-lg leading-relaxed max-w-3xl" style={{ textIndent: '1.5rem' }}>
+                  {project.summary}
                 </p>
               </div>
 

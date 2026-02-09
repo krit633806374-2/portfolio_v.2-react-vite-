@@ -16,9 +16,24 @@ export const projects: Project[] = [
     id: 'Doctora',
     category: 'all',
     title: 'Doctora',
-    techStack: ['Next.js', 'Spring Boot', 'TypeScript', 'PostgresSQL'],
-    summary: 'A full-stack health platform that streamlines clinic workflows and patient management.',
-    paperImages: ['/next.png', '/fm.png', '/node']
+    techStack: ['Next.js', 'TypeScript','Tailwind CSS', 'Spring Boot', 'PostgresSQL','Docker'],
+    summary: 'This project is a system-oriented full-stack web application for online doctor appointment booking. Patients can search for doctors by specialty, view real-time availability, and book appointments, while doctors manage schedules, approve bookings, and handle patient queues. Administrators oversee doctors, specialties, and system usage. The application is built with a 3-tier architecture using Next.js and TypeScript for the frontend, Spring Boot (Java) for the backend, and PostgreSQL as the database, with REST APIs secured by JWT authentication',
+    paperImages: ['/featured-project/Doctora/2.png', '/featured-project/Doctora/3.png', '/featured-project/Doctora/1.png'],
+    projectUrl: 'https://github.com/annop07/FrontendDoctora.git',
+    sampleImages: [
+      '/featured-project/Doctora/1.png',
+      '/featured-project/Doctora/2.png',
+      '/featured-project/Doctora/3.png',
+      '/featured-project/Doctora/4.png',
+      '/featured-project/Doctora/5.png',
+      '/featured-project/Doctora/6.png',
+      '/featured-project/Doctora/7.png',
+      '/featured-project/Doctora/8.png',
+      '/featured-project/Doctora/9.png',
+      '/featured-project/Doctora/10.png',
+      '/featured-project/Doctora/11.png',
+      '/featured-project/Doctora/12.png',
+    ]
   },
   {
     id: 'DoctoraMobile',
@@ -26,7 +41,25 @@ export const projects: Project[] = [
     title: 'Doctora Mobile',
     techStack: ['React Native', 'TypeScript', 'Expo', 'REST'],
     summary: 'Mobile companion app for on-the-go consultations and appointment tracking.',
-    paperImages: ['/rc.png', '/fm.png', '/node']
+    paperImages: ['/featured-project/DoctoraMobile/2.png', '/featured-project/DoctoraMobile/3.png', '/featured-project/DoctoraMobile/1.png'],
+    projectUrl: 'https://github.com/annop07/FrontendDoctoraMobile.git',
+    sampleImages: [
+      '/featured-project/DoctoraMobile/1.png',
+      '/featured-project/DoctoraMobile/2.png',
+      '/featured-project/DoctoraMobile/3.png',
+      '/featured-project/DoctoraMobile/4.png',
+      '/featured-project/DoctoraMobile/5.png',
+      '/featured-project/DoctoraMobile/6.png',
+      '/featured-project/DoctoraMobile/7.png',
+      '/featured-project/DoctoraMobile/8.png',
+      '/featured-project/DoctoraMobile/9.png',
+      '/featured-project/DoctoraMobile/10.png',
+      '/featured-project/DoctoraMobile/11.png',
+      '/featured-project/DoctoraMobile/12.png',
+      '/featured-project/DoctoraMobile/13.png',
+      '/featured-project/DoctoraMobile/14.png',
+      '/featured-project/DoctoraMobile/15.png'
+    ]
   },
   {
     id: 'PharmacyPOS',
@@ -58,14 +91,18 @@ export const projects: Project[] = [
     title: 'Real Time Chat',
     techStack: ['Photoshop', 'After Effects'],
     summary: 'Motion-driven visual concept for a real-time chat brand.',
-    paperImages: ['/canva.png']
+        paperImages: ['/featured-project/RealTimeChat/1.jpg'],
+    projectUrl: 'https://www.figma.com/design/X5HJLxx5X85UHpEgcGEnWo/RealTimeChat?node-id=0-1&m=dev&t=xsFUg1wuoEILluai-1',
+    sampleImages: [
+      '/featured-project/RealTimeChat/1.jpg'
+    ]
   },
   {
     id: 'EatAtHome-Design',
     category: 'design',
     title: 'Eat At Home',
     techStack: ['Figma', 'Canva'],
-    summary: 'Product design for an at-home food delivery experience.',
+    summary: 'In this project, I designed wireframes for a mobile application that simulates an online food ordering system for both customers and restaurant owners. Customers can browse and search for restaurants or menus and place food orders, while restaurant owners can register their restaurants, manage menus, receive orders, and update delivery statuses',
     paperImages: ['/Design/EatAtHome/77.jpg', '/Design/EatAtHome/9.jpg', '/Design/EatAtHome/1.jpg'],
     projectUrl: 'https://www.figma.com/design/SwBG8jvC401Z73mbVAxx18/EatAtHome?node-id=0-1&m=dev&t=haJLaFFp03D05Olk-1',
     sampleImages: [
@@ -101,7 +138,7 @@ export const projects: Project[] = [
     category: 'design',
     title: 'Doctora',
     techStack: ['Figma'],
-    summary: 'Design system and UX flows for clinic scheduling.',
+    summary: 'In this project, I was responsible for designing wireframes for an online doctor appointment web application in order to establish a shared understanding with the development team and to facilitate further frontend development.',
     paperImages: ['/Design/Doctora/1.jpg', '/Design/Doctora/12.jpg', '/Design/Doctora/10.jpg'],
     projectUrl: 'https://www.figma.com/design/qTf5bGDSNlYPHPKEhrCd5x/Doctora--Web-Application-?node-id=3-37&m=dev&t=jEIVlYfSSS9PSXGb-1',
     sampleImages: [
@@ -124,21 +161,21 @@ export const projects: Project[] = [
     category: 'design',
     title: 'Doctora Mobile',
     techStack: ['Figma'],
-    summary: 'Mobile-first UX prototypes for patient interactions.',
-    paperImages: ['/Design/Doctora%20Mobile/3.jpg', '/Design/Doctora%20Mobile/9.jpg', '/Design/Doctora%20Mobile/10.jpg'],
+    summary: 'In this project, I was responsible for designing wireframes for a mobile online doctor appointment application, which were intended to be used by the team for further development of the mobile application',
+    paperImages: ['/Design/DoctoraMobile/10.jpg', '/Design/DoctoraMobile/11.jpg', '/Design/DoctoraMobile/8.jpg'],
     projectUrl: 'https://www.figma.com/design/BlrJrEzooCjfBLSv7XOFhd/Doctora--Mobile-?node-id=0-1&m=dev&t=Bc9CqN2cUKeLy56o-1',
     sampleImages: [
-      '/Design/Doctora%20Mobile/1.jpg',
-      '/Design/Doctora%20Mobile/2.jpg',
-      '/Design/Doctora%20Mobile/3.jpg',
-      '/Design/Doctora%20Mobile/4.jpg',
-      '/Design/Doctora%20Mobile/5.jpg',
-      '/Design/Doctora%20Mobile/6.jpg',
-      '/Design/Doctora%20Mobile/7.jpg',
-      '/Design/Doctora%20Mobile/8.jpg',
-      '/Design/Doctora%20Mobile/9.jpg',
-      '/Design/Doctora%20Mobile/10.jpg',
-      '/Design/Doctora%20Mobile/11.jpg'
+      '/Design/DoctoraMobile/1.jpg',
+      '/Design/DoctoraMobile/2.jpg',
+      '/Design/DoctoraMobile/3.jpg',
+      '/Design/DoctoraMobile/4.jpg',
+      '/Design/DoctoraMobile/5.jpg',
+      '/Design/DoctoraMobile/6.jpg',
+      '/Design/DoctoraMobile/7.jpg',
+      '/Design/DoctoraMobile/8.jpg',
+      '/Design/DoctoraMobile/9.jpg',
+      '/Design/DoctoraMobile/10.jpg',
+      '/Design/DoctoraMobile/11.jpg'
     ]
   },
   {
@@ -146,7 +183,7 @@ export const projects: Project[] = [
     category: 'design',
     title: 'Elite Tutor',
     techStack: ['Figma'],
-    summary: 'Education marketplace UX for booking tutors.',
+    summary: 'In this project, I designed mobile application wireframes for an online English learning application developed using Thunkable, as required by the course. The application supports two types of users: teachers, who can post instructional materials, and students, who can access and learn from the content provided by the teachers.',
     paperImages: ['/Design/EliteTutor/7.jpg', '/Design/EliteTutor/11.jpg', '/Design/EliteTutor/1.jpg'],
     projectUrl: 'https://www.figma.com/design/YBB9t4B1BeufhU6jBCSUXC/Elite-Tutor?node-id=0-1&m=dev&t=nju3veoOXHGz12rF-1',
     sampleImages: [
@@ -172,7 +209,7 @@ export const projects: Project[] = [
     category: 'design',
     title: 'Laundry Tracker',
     techStack: ['Figma'],
-    summary: 'Service design for tracking laundry pickup and delivery.',
+    summary: 'In this project, I designed wireframe screens for a laundry service tracking system that monitors the status of washing, drying, and folding processes. The system was intended to support two types of users: shop owners, who could update laundry statuses through the system, and customers, who could track the progress of their laundry, check weather suitability for doing laundry, and view shop availability. However, due to unforeseen circumstances, the project was discontinued and not further developed',
     paperImages: ['/Design/LaundryTracker/1.jpg', '/Design/LaundryTracker/6.jpg', '/Design/LaundryTracker/3.jpg'],
     projectUrl: 'https://www.figma.com/design/azSBMRLhdAVTauFyCcdcBX/Laundry-Tracker?node-id=0-1&m=dev&t=R8vS8DVg0BzY4KD2-1',
     sampleImages: [
@@ -194,7 +231,7 @@ export const projects: Project[] = [
     category: 'design',
     title: 'RealTimeChat',
     techStack: ['Figma'],
-    summary: 'UI/UX concept for a chat platform.',
+    summary: 'In this project, I designed wireframe screens for an experimental project focused on real-time message transmission over HTTP',
     paperImages: ['/Design/RealTimeChat/1.jpg'],
     projectUrl: 'https://www.figma.com/design/X5HJLxx5X85UHpEgcGEnWo/RealTimeChat?node-id=0-1&m=dev&t=xsFUg1wuoEILluai-1',
     sampleImages: [
