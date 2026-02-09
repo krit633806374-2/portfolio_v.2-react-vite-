@@ -38,19 +38,14 @@ const Folder: React.FC<FolderProps> = ({
   paperImages = []
 }) => {
   const maxItems = 3;
+  // ใช้จำนวนรูปจริงที่มี ไม่เติมให้ครบ 3
   const papers = items.slice(0, maxItems);
-  while (papers.length < maxItems) {
-    papers.push(null);
-  }
-
   const paperSources = paperImages.slice(0, maxItems);
-  while (paperSources.length < maxItems) {
-    paperSources.push('');
-  }
+  const actualPaperCount = paperSources.length;
 
   const [open, setOpen] = useState(false);
   const [paperOffsets, setPaperOffsets] = useState<{ x: number; y: number }[]>(
-    Array.from({ length: maxItems }, () => ({ x: 0, y: 0 }))
+    Array.from({ length: actualPaperCount }, () => ({ x: 0, y: 0 }))
   );
 
   const glassGradient = 'linear-gradient(hsla(0, 0%, 21%, 0.8), hsla(0, 0%, 16%, 0.5))';
@@ -66,7 +61,7 @@ const Folder: React.FC<FolderProps> = ({
 
   const handleMouseLeave = () => {
     setOpen(false);
-    setPaperOffsets(Array.from({ length: maxItems }, () => ({ x: 0, y: 0 })));
+    setPaperOffsets(Array.from({ length: actualPaperCount }, () => ({ x: 0, y: 0 })));
   };
 
   const handlePaperMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => {
@@ -102,6 +97,15 @@ const Folder: React.FC<FolderProps> = ({
   const scaleStyle = { transform: `scale(${size})` };
 
   const getOpenTransform = (index: number) => {
+    // ปรับตำแหน่งตามจำนวนกระดาษจริง
+    if (actualPaperCount === 1) {
+      return 'translate(-50%, -100%) rotate(0deg)'; // กลางหน้า
+    }
+    if (actualPaperCount === 2) {
+      if (index === 0) return 'translate(-80%, -70%) rotate(-10deg)';
+      if (index === 1) return 'translate(-20%, -70%) rotate(10deg)';
+    }
+    // กรณี 3 แผ่น
     if (index === 0) return 'translate(-120%, -70%) rotate(-15deg)';
     if (index === 1) return 'translate(10%, -70%) rotate(15deg)';
     if (index === 2) return 'translate(-50%, -100%) rotate(5deg)';
@@ -129,7 +133,7 @@ const Folder: React.FC<FolderProps> = ({
             className="absolute z-0 bottom-[98%] left-0 w-[30px] h-[10px] rounded-tl-[5px] rounded-tr-[5px] rounded-bl-0 rounded-br-0"
             style={{ background: glassBackGradient }}
           ></span>
-          {papers.map((item, i) => {
+          {paperSources.map((paperSrc, i) => {
             let sizeClasses = '';
             if (i === 0) sizeClasses = open ? 'w-[70%] h-[80%]' : 'w-[70%] h-[80%]';
             if (i === 1) sizeClasses = open ? 'w-[80%] h-[80%]' : 'w-[80%] h-[70%]';
@@ -139,9 +143,9 @@ const Folder: React.FC<FolderProps> = ({
               ? `${getOpenTransform(i)} translate(${paperOffsets[i].x}px, ${paperOffsets[i].y}px)`
               : undefined;
 
-            const paperStyle: React.CSSProperties = paperSources[i]
+            const paperStyle: React.CSSProperties = paperSrc
               ? {
-                  backgroundImage: `url(${paperSources[i]})`,
+                  backgroundImage: `url(${paperSrc})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center'
                 }
@@ -163,7 +167,7 @@ const Folder: React.FC<FolderProps> = ({
                   borderRadius: '10px'
                 }}
               >
-                {item}
+                {papers[i]}
               </div>
             );
           })}
