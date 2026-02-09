@@ -1,65 +1,105 @@
-import { useEffect, useLayoutEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { useLocation, useNavigationType } from 'react-router-dom';
+
+const SCROLL_KEY = 'portfolio_home_scroll';
 
 export default function RouteScrollManager() {
   const location = useLocation();
   const navigationType = useNavigationType();
 
-  // เก็บ scroll แยกตาม pathname
-  const positionsRef = useRef<Record<string, number>>({});
-
-  // ปิด browser native restoration
-  useEffect(() => {
+  // 🔒 Step 1: ปิด native browser scroll restoration อย่างถาวร
+  useLayoutEffect(() => {
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
   }, []);
 
-  // save scroll ของหน้าปัจจุบัน
+  // 💾 Step 2: บันทึกตำแหน่ง scroll เฉพาะหน้า Home เท่านั้น
   useEffect(() => {
-    let raf = 0;
+    // ถ้าไม่ใช่หน้า Home ไม่ต้องทำอะไร
+    if (location.pathname !== '/') return;
 
-    const save = () => {
-      if (raf) return;
-      raf = requestAnimationFrame(() => {
-        positionsRef.current[location.pathname] = window.scrollY;
-        raf = 0;
+    let rafId = 0;
+    let isActive = true; // ตัวแปรควบคุมว่า effect นี้ยังใช้งานอยู่หรือไม่
+    
+    const saveScrollPosition = () => {
+      if (!isActive) return; // ❌ หยุดทำงานถ้า effect ถูก cleanup แล้ว
+      if (rafId) return; // ป้องกันการเรียกซ้ำ
+      
+      rafId = requestAnimationFrame(() => {
+        if (!isActive) return; // ❌ เช็คอีกครั้งก่อนบันทึก
+        
+        const currentScroll = window.scrollY;
+        
+        // ✅ บันทึกเฉพาะเมื่อมีค่า scroll จริงๆ (ไม่ใช่ 0 ตอนเพิ่งเปิดหน้า)
+        if (currentScroll > 0) {
+          sessionStorage.setItem(SCROLL_KEY, String(currentScroll));
+          console.log('💾 [SAVE] Scroll position:', currentScroll);
+        }
+        rafId = 0;
       });
     };
 
-    window.addEventListener('scroll', save, { passive: true });
+    // ฟังการ scroll แบบ real-time
+    window.addEventListener('scroll', saveScrollPosition, { passive: true });
 
+    // Cleanup เมื่อเปลี่ยนหน้า
     return () => {
-      if (raf) cancelAnimationFrame(raf);
-      positionsRef.current[location.pathname] = window.scrollY;
-      window.removeEventListener('scroll', save);
+      isActive = false; // ❌ ปิดการทำงานทันที
+      if (rafId) cancelAnimationFrame(rafId);
+      window.removeEventListener('scroll', saveScrollPosition);
+      
+      // ⚠️ CRITICAL: บันทึกตำแหน่งสุดท้าย แต่เฉพาะเมื่อมีค่า > 0
+      const finalScroll = window.scrollY;
+      if (finalScroll > 0) {
+        sessionStorage.setItem(SCROLL_KEY, String(finalScroll));
+        console.log('💾 [SAVE ON LEAVE] Final scroll position:', finalScroll);
+      } else {
+        console.log('⚠️ [SKIP SAVE] Scroll is 0, not overwriting saved position');
+      }
     };
   }, [location.pathname]);
 
-  // restore scroll ตอน back
+  // 📍 Step 3: จัดการ scroll ตามสถานการณ์
   useLayoutEffect(() => {
-    // หน้า detail → บังคับขึ้นบน
+    console.log('🔄 [ROUTE CHANGE]', {
+      path: location.pathname,
+      type: navigationType,
+    });
+
+    // 📌 กรณีที่ 1: เข้าหน้า Project Detail → เริ่มที่บนสุดเสมอ
     if (location.pathname.startsWith('/projects/')) {
-      window.scrollTo({ top: 0, behavior: 'auto' });
+      console.log('📄 [PROJECT PAGE] Scrolling to top');
+      window.scrollTo(0, 0);
       return;
     }
 
-    // ไม่ใช่ back / forward
-    if (navigationType !== 'POP') {
-      window.scrollTo({ top: 0, behavior: 'auto' });
-      return;
+    // 📌 กรณีที่ 2: อยู่ที่หน้า Home
+    if (location.pathname === '/') {
+      
+      // 🔙 กรณี 2.1: กด Back กลับมาหน้า Home
+      if (navigationType === 'POP') {
+        const savedScroll = sessionStorage.getItem(SCROLL_KEY);
+        const targetY = savedScroll ? parseInt(savedScroll, 10) : 0;
+        
+        console.log('🔙 [BACK TO HOME] Restoring scroll to:', targetY);
+        
+        // Restore ทันที
+        window.scrollTo(0, targetY);
+        
+        // Retry mechanism: ลองอีก 3 ครั้ง เพื่อรอให้หน้าเว็บ render เสร็จ
+        setTimeout(() => window.scrollTo(0, targetY), 0);
+        setTimeout(() => window.scrollTo(0, targetY), 50);
+        setTimeout(() => window.scrollTo(0, targetY), 100);
+        
+        return;
+      }
+      
+      // ➡️ กรณี 2.2: เข้าหน้า Home ใหม่ (กดโลโก้, refresh, เข้าครั้งแรก)
+      console.log('🏠 [NEW HOME VISIT] Scrolling to top');
+      window.scrollTo(0, 0);
+      sessionStorage.removeItem(SCROLL_KEY); // ล้างค่าเก่าทิ้ง
     }
-
-    const saved = positionsRef.current[location.pathname] ?? 0;
-
-    // restore แบบกัน layout shift
-    window.scrollTo({ top: saved, behavior: 'auto' });
-    requestAnimationFrame(() =>
-      window.scrollTo({ top: saved, behavior: 'auto' })
-    );
-    requestAnimationFrame(() =>
-      window.scrollTo({ top: saved, behavior: 'auto' })
-    );
   }, [location.pathname, navigationType]);
 
   return null;
