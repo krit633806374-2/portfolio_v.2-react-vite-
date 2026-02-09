@@ -22,7 +22,7 @@ export default function QuoteSection() {
   );
 
   return (
-    <section ref={ref} className="relative w-full py-32 px-6 bg-transparent flex items-center justify-center">
+    <section ref={ref} className="quote-section relative w-full py-32 px-6 bg-transparent flex items-center justify-center">
       <div className="max-w-4xl w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

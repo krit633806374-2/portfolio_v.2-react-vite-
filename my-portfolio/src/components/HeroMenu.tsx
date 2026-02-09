@@ -45,8 +45,59 @@ export default function HeroMenu() {
   const scrollToSection = (sectionName: string) => {
     const section = document.querySelector(`[data-section="${sectionName}"]`) as HTMLElement | null;
     if (!section) return;
+    
+    const isAtTop = window.scrollY < 100; // Check if user is at top
+    
+    if (isAtTop && sectionName !== 'home') {
+      // Slow scroll through entire Quote section
+      const quoteSection = document.querySelector('.quote-section') as HTMLElement | null;
+      
+      if (quoteSection) {
+        const quoteSectionTop = quoteSection.offsetTop;
+        const quoteSectionHeight = quoteSection.offsetHeight;
+        // Stop at 70% through quote section (not all the way to bottom)
+        const quoteScrollTarget = quoteSectionTop + (quoteSectionHeight * 0.7);
+        
+        // Calculate scroll duration based on quote section height
+        const scrollDistance = quoteScrollTarget - window.scrollY;
+        const scrollDuration = 7200; // 7.2 seconds to scroll through quote (10% faster)
+        const scrollStep = scrollDistance / (scrollDuration / 16); // 60fps
+        
+        let currentScroll = window.scrollY;
+        let scrolling = true;
+        
+        const smoothScrollThroughQuote = () => {
+          if (!scrolling) return;
+          
+          currentScroll += scrollStep;
+          
+          if (currentScroll >= quoteScrollTarget) {
+            currentScroll = quoteScrollTarget;
+            scrolling = false;
+            
+            // After reaching end of quote, quickly scroll to target section
+            setTimeout(() => {
+              const baseTop = section.getBoundingClientRect().top + window.scrollY;
+              const offset = sectionName === 'experience' ? 80 : 0;
+              window.scrollTo({ top: baseTop + offset, behavior: 'smooth' });
+            }, 10); // Small delay to appreciate quote finish
+          }
+          
+          window.scrollTo({ top: currentScroll, behavior: 'auto' });
+          
+          if (scrolling) {
+            requestAnimationFrame(smoothScrollThroughQuote);
+          }
+        };
+        
+        requestAnimationFrame(smoothScrollThroughQuote);
+        return;
+      }
+    }
+    
+    // Normal scroll behavior
     const baseTop = section.getBoundingClientRect().top + window.scrollY;
-  const offset = sectionName === 'experience' ? 80 : 0;
+    const offset = sectionName === 'experience' ? 80 : 0;
     window.scrollTo({ top: baseTop + offset, behavior: 'smooth' });
   };
 
