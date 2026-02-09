@@ -13,7 +13,7 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: 'Doctora',
+    id: 'Doctora-featured',
     category: 'all',
     title: 'Doctora',
     techStack: ['Next.js', 'TypeScript','Tailwind CSS', 'Spring Boot', 'PostgresSQL','Docker'],
@@ -36,12 +36,12 @@ export const projects: Project[] = [
     ]
   },
   {
-    id: 'DoctoraMobile',
+    id: 'DoctoraMobile-featured',
     category: 'all',
     title: 'Doctora Mobile',
     techStack: ['React Native', 'TypeScript', 'Expo', 'REST'],
-    summary: 'Mobile companion app for on-the-go consultations and appointment tracking.',
-    paperImages: ['/featured-project/DoctoraMobile/2.png', '/featured-project/DoctoraMobile/3.png', '/featured-project/DoctoraMobile/1.png'],
+    summary: 'This project is a system-oriented mobile application for doctor appointment booking on smartphones. It allows patients to find and select doctors based on specialty and availability, view schedules in real time, manage appointments, and receive instant updates. The application is developed using React Native and Expo, with backend integration through the Doctora API for cross-platform support',
+    paperImages: ['/featured-project/DoctoraMobile/2.png', '/featured-project/DoctoraMobile/1.png', '/featured-project/DoctoraMobile/3.png'],
     projectUrl: 'https://github.com/annop07/FrontendDoctoraMobile.git',
     sampleImages: [
       '/featured-project/DoctoraMobile/1.png',
@@ -62,7 +62,7 @@ export const projects: Project[] = [
     ]
   },
   {
-    id: 'PharmacyPOS',
+    id: 'PharmacyPOS-featured',
     category: 'all',
     title: 'Phamacy POS',
     techStack: ['React', 'Tailwind', 'Prisma'],
@@ -70,29 +70,34 @@ export const projects: Project[] = [
     paperImages: ['/rc.png', '/tw.png']
   },
   {
-    id: 'EatAtHome',
+    id: 'EatAtHome-featured',
     category: 'all',
-    title: 'EatAtHome',
-    techStack: ['Figma', 'Framer'],
+    title: 'Eat At Home',
+    techStack: ['Flutter', 'Dart', 'Kotlin', 'Firebase'],
     summary: 'Product design case study for a food delivery experience.',
     paperImages: ['/fm.png', '/canva.png']
   },
   {
-    id: 'FaceCheck',
+    id: 'FaceCheck-featured',
     category: 'all',
     title: 'FaceCheck',
-    techStack: ['Figma', 'Illustrator'],
-    summary: 'Identity verification concept focused on safe user onboarding.',
-    paperImages: ['/fm.png']
+    techStack: ['Python', 'OpenCV', 'SQLite'],
+    summary: 'Mobile companion app for on-the-go consultations and appointment tracking.',
+    paperImages: ['/featured-project/FaceCheck/2.jpg', '/featured-project/FaceCheck/1.jpg'],
+    projectUrl: 'https://github.com/nicky-wrc/Face-Recognition-Attendance-project.git',
+    sampleImages: [
+      '/featured-project/FaceCheck/1.jpg',
+      '/featured-project/FaceCheck/2.jpg',
+    ]
   },
   {
-    id: 'RealTimeChat',
+    id: 'RealTimeChat-featured',
     category: 'all',
     title: 'Real Time Chat',
-    techStack: ['Photoshop', 'After Effects'],
+  techStack: ['HTML','CSS','JavaScript','Node.js', 'Express.js','Socket.IO'],
     summary: 'Motion-driven visual concept for a real-time chat brand.',
         paperImages: ['/featured-project/RealTimeChat/1.jpg'],
-    projectUrl: 'https://www.figma.com/design/X5HJLxx5X85UHpEgcGEnWo/RealTimeChat?node-id=0-1&m=dev&t=xsFUg1wuoEILluai-1',
+    projectUrl: 'https://github.com/4mpcln/RealTimeChat.git',
     sampleImages: [
       '/featured-project/RealTimeChat/1.jpg'
     ]

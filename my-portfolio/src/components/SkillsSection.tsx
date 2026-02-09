@@ -93,10 +93,11 @@ export default function SkillsSection() {
           {/* Second Row - 5 items */}
           <div className="flex flex-wrap gap-3 justify-left">
             {[
+              { name: 'Python', icon: 'python.png' },
               { name: 'Tailwind CSS', icon: 'tw.png' },
-              { name: 'Vite', icon: 'vt.png', scale: '1.7' },
-              { name: 'Vercel', icon: 'vercel.png' },
               { name: 'Express.JS', icon: 'express.png', scale: '1.5' },
+              { name: 'Vite', icon: 'vt.png', scale: '1.7' },
+              { name: 'Vercel', icon: 'vercel.png' }
             ].map((tool, idx) => (
               <div key={idx} className="flex flex-col items-center gap-1">
                 <motion.div
